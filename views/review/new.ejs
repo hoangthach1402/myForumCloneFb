@@ -1,0 +1,18 @@
+<%- include('../partials/header.ejs') %>
+<div>
+     <h3>Form review cho em hang : <%=cave.name%></h3>
+    <form action="/cave/<%=cave.id%>/review/new" method="post" enctype="multipart/form-data">
+        <div class='form-group'>
+            <label for="content">Nhap noi dung</label>
+            <input type="text" name='content' class='form-control'>
+        </div>
+        <div>
+            <label for="images">images</label>
+            <input type="file" name='images' multiple>
+        </div>
+        <button type='submit' class='btn btn-primary'>submit</button>
+    
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>

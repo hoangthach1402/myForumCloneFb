@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs') %>
+<form action='/post' method='post' enctype='multipart/form-data'>
+
+   <!-- cave -->
+    <div class='form-group'>
+        <label for="">cave Name:</label>
+        <input type="text" name='cavename' class='form-control'>
+    </div>
+  
+    <div class='form-group'>
+        <label for="">cave age:</label>
+        <input type="number" name='caveage' class='form-control'>
+    </div>
+    <div class='form-group'>
+        <label for="">cave price:</label>
+        <input type="number" name='caveprice' class='form-control'>
+    </div>
+    <div class='form-group'>
+        <label for="">cave image:</label>
+       
+    </div>
+  
+ 
+<!-- post -->
+     <div class='form-group'>
+        <label for="">post Title:</label>
+        <input type="text" name='posttitle' class='form-control'>
+    </div>
+    <div class='form-group'>
+        <label for="">post Description:</label>
+        <input type="text" name='postdescription' class='form-control'>
+    </div>
+
+    <div class='form-group'>
+        <label for="avatar">avatar</label>
+        <input type="file" name='images' class='form-control' multiple>
+    </div>
+    <button type='submit'>Create Post</button>
+</form>
+<!--  -->
+<%- include('../partials/footer.ejs') %>

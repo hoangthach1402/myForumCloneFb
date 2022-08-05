@@ -1,0 +1,128 @@
+
+
+<%- include('../partials/header.ejs'); -%>
+<div class="container mt-4 mb-4 p-3 ">
+  <div class="card p-4">
+    <div
+      class="image d-flex flex-column justify-content-center align-items-center"
+    >
+      <button class="btn btn-secondary">
+        <img src="<%=user.image.url %>" height="100" width="100" />
+      </button>
+      <span class="name mt-3"><%=user.username %></span>
+      <span class="idd"><%=user.email%></span>
+      <div
+        class="d-flex flex-row justify-content-center align-items-center gap-2"
+      >
+        <span class="idd1"><%user._id%></span>
+        <span><i class="fa fa-copy"></i></span>
+      </div>
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-3"
+      >
+        <span class="number">1069 <span class="follow">Followers</span></span>
+      </div>
+      <div class="d-flex mt-2">
+        <button class="btn1 btn-dark">Edit Profile</button>
+      </div>
+      <div class="text mt-3">
+        <span
+          >Hello anh em , tui la nguoi sang lap web nay.<br /><br />
+          rat vui dc gap va lam quen cung moi nguoi. buoi sang tot lanh
+        </span>
+      </div>
+      <div
+        class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"
+      >
+        <span><i class="fa fa-twitter"></i></span>
+        <span><i class="fa fa-facebook-f"></i></span>
+        <span><i class="fa fa-instagram"></i></span>
+        <span><i class="fa fa-linkedin"></i></span>
+      </div>
+      <div class="px-2 rounded mt-4 date">
+        <span class="join">Join At: <%=user.createdAt.toLocaleDateString() %></span>
+      </div>
+    </div>
+  </div>
+<!-- post gan day -->
+  <div>
+    <p class='fw-bold'>POST gan da!</p>
+    <div>
+      <table class="table">
+        <thead">
+          <tr>
+            <th>#</th>
+            <th>Titlle</th>
+            <th>Description</th>
+            <th>Ngay:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.posts.forEach(post=>{ %>
+            <tr>
+              <th><a href="/cave/<%=post.cave%>"><%=post.title %></a></th>
+              <td><%=post.description %></td>
+              <td><%= new Date(post.createdAt).toLocaleDateString()%></td>
+              <td><%=post.description %></td>
+            </tr>
+          <%}) %>
+       
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <!-- review gan day -->
+
+    <div>
+      <p class='fw-bold'>Review Gan Day</p>
+      <table class='table'>
+        <thead>
+          <th>#</th>
+          <th>Cave</th>
+          <th>Noi Dung</th>
+          <th>Ngay Tao</th>
+        </thead>
+        <tbody>
+          <% user.reviews.forEach(review=>{ %>
+            <tr>
+              <th>#</th>
+              <td><a href="/cave/<%=review.cave.id%>/review/<%=review._id%>"><%=review.cave.name%></a></td>
+              <td><%=review.content%></td>
+              <td><%= new Date(review.createdAt).toLocaleDateString()%></td>
+            </tr>
+      <% }) %>
+        
+        </tbody>
+      </table>
+    
+    </div>
+
+    <!-- comment -->
+    <div>
+      <p class='fw-bold'>Comment gan day</p>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cave</th>
+            <th>Noi dung</th>
+            <th>Ngay</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.comments.forEach(comment=>{%>
+            <tr>
+              <th>#</th>
+              <td><a href="/"><%=comment.cave.name%></a></td>
+              <td><%=comment.content%></td>
+              <td><%= new Date(comment.createdAt).toLocaleDateString()%></td>
+            </tr>
+         <% }) %>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+
+</div>
+<%- include('../partials/footer.ejs'); -%>

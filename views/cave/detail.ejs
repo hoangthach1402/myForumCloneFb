@@ -1,0 +1,33 @@
+<%-include('../partials/header.ejs') %> 
+<div>
+    <h1>Chi tiet :</h1>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%=cave.name%></h5>
+          <p class="card-text"><%=cave.price%></p>
+          <p class="card-text"><%=cave.age%></p>
+          <a href="/cave/<%=cave._id%>/review/new" class="btn btn-primary">Tao Review</a>
+        </div>
+    </div>
+   <div class='d-flex'>
+       <div class='w-50'>
+       <ul>
+           <% cave.fileUploads.forEach(function(image) { %>
+               <img src="<%=image.filePath%>" class=" w-200 card-img-top" alt="...">
+               <% }); %> 
+          </ul>
+      </div>
+      <div class="w-50 bg-dark">
+            <p class='text-white'>dang co <%-cave.reviews.length %> reviews</p>
+            <% cave.reviews.forEach(function(review){ %>
+            <a href='/cave/<%=cave._id%>/review/<%=review._id%>'><%=review.user.username%></a>
+           <% }); %>
+     
+      
+      </div>
+   </div>
+        
+         
+</div>
+
+<%-include('../partials/footer.ejs') %> 

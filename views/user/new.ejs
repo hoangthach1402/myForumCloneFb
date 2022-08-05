@@ -1,0 +1,37 @@
+<%- include('../partials/header.ejs') %>
+ <div>
+     <form action="/register" method='post' enctype="multipart/form-data">
+         <div class='form-group'>
+            <label for="username">username</label> 
+            <input type="text" id='username' name='user[username]' class='form-control'>
+         </div>
+         <div class='form-group'>
+            <label for="password">password</label> 
+            <input type="text" id='password' name='user[password]' class='form-control'>
+         </div>
+         <div class='form-group'>
+            <label for="email">email</label> 
+            <input type="text" id='email' name='user[email]' class='form-control'>
+         </div>
+         <div>
+            <input type="radio" id="huey" name="user[gender]" value="female"
+                   checked>
+            <label for="huey">female</label>
+          </div>
+      
+          <div>
+            <input type="radio" id="dewey" name="user[gender]" value="male">
+            <label for="dewey">male</label>
+          </div>
+      
+          <div class='form-group'>
+              <label for="avatar">avatar</label>
+              <input type="file" name='images' class='form-control' multipart>
+          </div>
+    
+         <button type='submit'>register</button>
+     </form>
+ </div>
+<%- include('../partials/footer.ejs') %>
+
+

@@ -1,0 +1,17 @@
+<%- include('../partials/header.ejs') %>
+    <div class='m-auto'>
+        <h1><%=post.title %></h1>
+        <div class="card" style="width: 18rem;">
+            <img src="<%=post.cave.fileUploads[0].filePath%>" class="card-img-top" alt="...">
+            <div class='card-title'><%=post.cave.name%></div>
+            <div class="card-body">
+              <p class="card-text">Gia: <%=post.cave.price%></p>
+              <p class="card-text">Tuoi: <%=post.cave.age%></p>
+              <a  href='/cave/<%=post.cave._id%>' class="btn btn-primary text-center">Chi tiet</a>
+            
+            </div>
+          </div>
+        <p><%=post.description %></p>
+            
+    </div>
+<%- include('../partials/footer.ejs') %>

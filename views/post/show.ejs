@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+<div>
+  <h3>Tat cac em hang</h3>
+
+  <div class="d-flex">
+    <% posts.forEach(post=>{ %>
+    <div class="card" style="width: 18rem">
+     
+            <!-- <img src="<%post.cave.fileUploads[0].filePath%>" class="card-img-top" alt="..." /> -->
+       <%for(var i=0; i<1; i++){ %>
+        <img src="<%=post.cave.fileUploads[i].filePath%>" alt="">
+      <%} %>
+      
+      <div class="card-body">
+        <h5 class="card-title"><%post.title%></h5>
+        <p class="card-text">
+          <%=post.description %>
+        </p>
+        <a href="/cave/<%=post.cave._id%>" class="btn btn-primary">Chi tiet</a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
