@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose') 
 const router = require('./routes')
-const errorHandler = require('./middleware/handleError')
+// const errorHandler = require('./middleware/handleError')
 require('dotenv').config()
 const path = require('path')
 const ejsEngine = require('ejs-mate');
@@ -33,7 +33,7 @@ app.use('/',router)
 
 
 
-app.use(errorHandler)
+// app.use(errorHandler)
 
 app.use(function(req, res, next){
   res.status(404);
