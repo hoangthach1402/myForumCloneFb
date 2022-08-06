@@ -5,15 +5,15 @@ const {storage} = require('../cloudinary')
 const upload = multer({ storage })
 
 const userController = require('../controller/userController')
-const {isAuthenticated,isAdmin} = require('../middleware/auth')
+const {isAuthenticated,isAdmin,checkOwner} = require('../middleware/auth')
 
 
 
 router.route('/').get(userController.getUsers)
 router.get('/:userId/getallcomment',userController.getUserByIdWithComment)
 
-router.get('/:userId/details',isAuthenticated,userController.getDetail)
-router.post('/:userId/banned',isAuthenticated,isAdmin,userController.updateBanned)
+router.get('/:userId/details',isAuthenticated,checkOwner,userController.getDetail)
+router.post('/:userId/banned',isAuthenticated,checkOwner,userController.updateBanned)
 
 
 module.exports = router

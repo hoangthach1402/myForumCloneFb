@@ -9,7 +9,7 @@ const reviewController = {
      },
      getReview:async(req,res)=>{
   
-        const review =  await Review.findById(req.params.id).populate({path:'fileUploads'})
+        const review =  await Review.findById(req.params.id).populate({path:'fileUploads'}).populate({path:'user',select:'username'}).populate({path:'cave',select:'name'})
       
         res.json(review)
      },

@@ -1,26 +1,60 @@
 <%- include('../partials/header.ejs') %>
 <div>
-  <h3>Tat cac em hang</h3>
+  <h3>Danh sach bai dang</h3>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>name</th>
 
-  <div class="d-flex">
-    <% posts.forEach(post=>{ %>
-    <div class="card" style="width: 18rem">
-     
-            <!-- <img src="<%post.cave.fileUploads[0].filePath%>" class="card-img-top" alt="..." /> -->
-       <%for(var i=0; i<1; i++){ %>
-        <img src="<%=post.cave.fileUploads[i].filePath%>" alt="">
-      <%} %>
-      
-      <div class="card-body">
-        <h5 class="card-title"><%post.title%></h5>
-        <p class="card-text">
-          <%=post.description %>
-        </p>
-        <a href="/cave/<%=post.cave._id%>" class="btn btn-primary">Chi tiet</a>
-      </div>
-    </div>
-    <% }) %>
+          <th>Ngay dang</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% posts.docs.forEach((post,index)=>{ %>
+        <tr>
+          <td><a href="/post/<%=post.id%>"><%=++index%></a> </td>
+          <td><%=post.title%></td>
+          <td><%=new Date(post.createdAt).toLocaleDateString()%></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
   </div>
+
+  <!-- paging -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <% if(posts.hasPrevPage){ %>
+      <li class="page-item">
+        <a class="page-link" href="/user?page=<%=posts.prevPage%>">Previous</a>
+      </li>
+      <%}else { %>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Previous</a>
+      </li>
+      <% } %> <% for(var i =1; i<= posts.totalPages;i++){ %> <% if(posts.page
+      ===(i)) { %>
+      <li class="page-item active">
+        <a class="page-link" href="/user?page=<%=i%>"><%=i%></a>
+      </li>
+      <% }else{ %>
+      <li class="page-item">
+        <a class="page-link" href="/user?page=<%=i%>"><%=i%></a>
+      </li>
+      <% } %> <% } %> <% if(posts.hasNextPage){ %>
+      <li class="page-item">
+        <a class="page-link" href="/user?page=<%=posts.nextPage%>">Next</a>
+      </li>
+      <% }else { %>
+      <li class="page-item disabled">
+        <a class="page-link" href="/user?page=<%=posts.nextPage%>">Next</a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+  <!--  -->
 </div>
 
 <%- include('../partials/footer.ejs') %>

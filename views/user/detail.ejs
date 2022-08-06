@@ -45,7 +45,8 @@
     </div>
   </div>
 <!-- post gan day -->
-  <div>
+  <!-- <p><%=owner%></p>  check owner  -->
+<div>
     <p class='fw-bold'>POST gan da!</p>
     <div>
       <table class="table">
@@ -55,15 +56,21 @@
             <th>Titlle</th>
             <th>Description</th>
             <th>Ngay:</th>
+             <th>methods</th>
           </tr>
         </thead>
         <tbody>
           <% user.posts.forEach(post=>{ %>
             <tr>
-              <th><a href="/cave/<%=post.cave%>"><%=post.title %></a></th>
+              <th><a href="/cave/<%=post.cave%>"><%=post.title %> </a></th>
               <td><%=post.description %></td>
               <td><%= new Date(post.createdAt).toLocaleDateString()%></td>
               <td><%=post.description %></td>
+              <!-- edit and delete  post -->
+              <!-- edit :/post/:postId/edit -->
+              <td><%if(owner){%> <button><a href="/post/<%=post.id%>/edit">Edit</a></button> 
+                <form action="/post/<%=post.id%>?_method=DELETE" method='POST'><button class='btn text-danger' type='submit'>X</button></form>
+                <%} %></td>
             </tr>
           <%}) %>
        

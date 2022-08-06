@@ -1,11 +1,17 @@
 <%- include('../partials/header.ejs') %>
-<div>
-   <div class=''>
+<div class='container'>
+   <div class='border'>
       <h3 class='text-dark'>By: <%=review.user.username%></h3>
       <div class='p-2 bg-dark text-white'><%=review.content%></div>
-       <% review.fileUploads.forEach(image=>{%>
-       <img class='d-block w-50' src="<%=image.filePath%>" alt="">
-      <% }) %>
+      <div class='d-flex'>
+
+         <% review.fileUploads.forEach(image=>{%>
+          <img  style='width:400px' class='d-block ' src="<%=image.filePath%>" alt="">
+         <% }) %>
+      </div> 
+   </div>
+   <div>
+      <p>Thong tin em hang: <a class='link-primary' href="/cave/"><%=review.cave.name%></a></p>
    </div>
 </div>
  

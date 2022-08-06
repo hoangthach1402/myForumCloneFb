@@ -8,11 +8,17 @@ const upload = multer({ storage })
 
 
 router.route("/").get(postController.getPosts)
-router.post('/',upload.array('images'),postController.createPost)
-router.route('/new').get(postController.get_newPost)
+router.post('/',isAuthenticated,upload.array('images'),postController.createPost)
+router.route('/new').get(isAuthenticated,postController.get_newPost)
 router.route('/:id').delete(postController.deletePost).get(postController.getPost)
-router.post("/:postId/comment", postController.getPostComment);
+router.post("/:postId/comment",isAuthenticated, postController.getPostComment);
 
 
 module.exports = router;    
+
+
+
+
+
+
 

@@ -45,9 +45,19 @@ const checkUser = async (req, res, next) => {
     next();
   }}
 ;
+const checkOwner = (req,res,next)=>{
+  // console.log(req.user)  
+  if(req.user.id == req.params.userId){
+    req.owner =true
+  }else{
+    req.owner=false
+  }
+ next()
+//kiem tra req.user._id ===  
+}
 const isAdmin = (req, res, next) => {
   if (req.user.role != "admin")
     next(new ErrorResponse(`Admin only permission!`, 403));
   next();
 };
-module.exports = { isAuthenticated, isAdmin, checkUser };
+module.exports = { isAuthenticated, isAdmin, checkUser ,checkOwner};
