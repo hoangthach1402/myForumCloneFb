@@ -7,10 +7,11 @@ const reviewRouter = require('./review')
 const fileUploadRouter = require('./fileUpload') //
 const caveRouter = require('./cave')
 const authRouter = require('./auth')
+const writeRouter = require('./write')
 const {checkUser}= require('../middleware/auth')
 
 router.use('*', checkUser);
-
+router.use('/write',writeRouter)
 router.use('/user',checkUser,userRouter) 
 router.use('/comment',checkUser,commentRouter) 
 router.use('/post',checkUser,postRouter) 

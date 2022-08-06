@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const asyncHandler = require("../utils/async");
 const { generateToken } = require("../utils/auth");
+const Write = require('../models/Write')
 const userController = {
   getUsers: async (req, res) => {
     const options = {
@@ -24,10 +25,17 @@ const userController = {
     });
     res.json(userWithReview);
   },
+
   getDetail: async (req, res, next) => {
     try {
+      // const writes =[] 
+       
+      // const wall = req.headers.referer.split('/')[4]  
+      const writes = await Write.find({wall:req.params.userId }).populate({path:'wall',select:'username'}).populate({path:'user',select:'username'}).populate({path:'fileUploads'}).populate({path:'comments',populate:{path:'user',select:'username'}}).sort({createdAt:-1}).limit(10)
+      console.log('writes debug line 34 :',writes)
       const owner = req.owner 
       const user = await User.findById(req.params.userId)
+
         .populate({
           path: "comments",
           populate: { path: "cave", select: "name" },
@@ -40,7 +48,8 @@ const userController = {
         .limit(5);
       // console.log(user);
       console.log(owner)
-      res.render("user/detail", { user,owner });
+      // res.json(writes)
+      res.render("user/detail", { userdetail:user,owner,writes });
     } catch (err) {
       next(err);
     }

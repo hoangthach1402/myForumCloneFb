@@ -1,0 +1,11 @@
+<div class="mt-2">
+
+    <form action="/write" method='POST' enctype="multipart/form-data">
+        <textarea style='min-width:450px;width:80%' class="mb-2" name="content" id="" cols="30" rows="3" placeholder="ban dang thay the nao?">
+            
+        </textarea> 
+         <input name='images' type="file" multiple>         
+        <button class='btn btn-success d-block m-auto' type='submit'>Đăng Bài`</button>
+    </form>
+</div>
+<%- include('./show.ejs') %>

@@ -9,7 +9,7 @@ const fileUploadSchema = new mongoose.Schema({
     docModel:{
         type:String,
         required:true,
-        enum:['Cave','User','Review']
+        enum:['Cave','User','Review','Write']
     },
     fileName:{type:String},
     filePath:{type:String},

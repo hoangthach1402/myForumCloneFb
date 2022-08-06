@@ -1,0 +1,59 @@
+
+<div class="m-2">
+  <%writes.forEach(write=>{ %> 
+   <div class='border mb-2 p-2'>
+    <%if(owner || (write.user.id==user.id)){ %>
+      <form action="/write/<%=write._id%>?_method=DELETE" method='POST'>
+
+        <button type='submit' class="btn btn-danger">X</button>
+      </form>
+
+    <%} %>
+
+  
+  <p>
+    <% if(write.wall._id.toString() != write.user._id.toString()) {%>
+    from  <a class='link-primary' href="/user/<%=write.user.id%>/details"> <%=write.user.username%> </a> to 
+      <%}%>     
+    <a class="link-primary" href="/user/<%=write.wall._id%>/details"
+      ><%=write.wall.username%></a
+    >
+    Ngay: <%= new Date(write.createdAt).toLocaleString()%>
+  </p>
+
+
+  <p style="text-indent: 50px;" class="fw-bold p-2"><%=write.content%></p>
+ <!-- image render -->
+  <div class="d-flex">
+    <% write.fileUploads.forEach(image=>{%>
+    <!-- <p><%=image.filePath%></p> -->
+    <img
+      style="max-width: 300px; min-width: 200px"
+      src="<%=image.filePath%>"
+      alt=""
+    />
+    <%}) %>
+  </div>
+ 
+  <!-- Show Comment  -->
+   <div class='p-2 text-light mt-2'>
+    <% write.comments.forEach(comment=>{ %>
+      <div style='margin-left:20px' class='border-bottom mb-2'>
+        <p><a class='link-primary' href="/user/<%=comment.user.id%>"><%=comment.user.username%></a>
+           <p style='text-indent: 30px;font-size: 17px;'><%=comment.content%>  <span style='font-size:14px;opacity:0.5'><%=new Date(comment.createdAt).toLocaleString()%></span></p>
+          </p>
+
+      </div>
+   <% }) %> 
+   </div>
+  <!--  -->
+  
+  <form action="/write/<%=write._id%>?_method=put" method="post">
+    <input name='commentInput' class='input my-2' type="text" placeholder="binh luan" />
+    <button class='btn btn-success'><i class="fa-solid fa-paper-plane"></i></button>
+  </form>
+</div>
+  <%}) %>
+
+</div>
+

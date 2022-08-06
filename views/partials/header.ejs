@@ -52,10 +52,7 @@ nav li a{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
-.btn{
-  border-radius: 36px;
-  background: #FEE996;
-}
+
 form h2{
   font-size: 2.4em;
   font-weight: 900;
@@ -76,22 +73,7 @@ input{
   font-size: 1em;
   /* width: 100%; */
 }
-/* label{
-  display: block;
-  margin: 20px 0 10px;
-} */
-button{
-  margin-top: 15px;
-  border-radius: 36px;
-  background: #FEE996;
-  border:0;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.8em;
-  display: block;
-  padding: 5px 8px;
-  letter-spacing: 2px;
-}
+
 .error{
   color: #ff0099;
   margin: 10px 2px;
@@ -116,14 +98,7 @@ header h3{
   margin-left: 2px;
   color: #999;
 }
-header .btn{
-  margin-top: 20px;
-  padding: 12px 18px;
-  text-transform: uppercase;
-  font-weight: bold;
-  display: inline-block;
-  font-size: 0.8em;
-}
+
 
 
 footer{
@@ -135,13 +110,13 @@ footer{
 </head>
 <body>
   <nav class=''>
-    <button class='btn btn-outline'><a href="/">Forum App</a></button>
+    <button class='btn bg-white'><a href="/">Forum App</a></button>
     <div class='d-flex'>
       <% if (user) { %>
-        <button class='btn link-primary'><a href="/post/new"><i class="fa-solid fa-marker"></i>New Post</a></button>
-        <button class='btn btn-outline'><img style='width:30px; border-radius:999px' src="<%=user.image.url%>" alt=""> Welcome, <%= user.username %></button>
-        <button class='btn btn-outline'><a  href="/user/<%=user.id%>/details">Info</a></button>
-        <button class='btn btn-outline'><a href="/logout">Log out</a></button>
+        <button class='btn btn-success text-white '><a href="/post/new"><i class="fa-solid fa-marker"></i>New Post</a></button>
+        <button class='bg-white btn'><img style='width:30px; border-radius:999px' src="<%=user.image.url%>" alt=""> Welcome, <%= user.username %></button>
+        <button class='btn bg-white'><a  href="/user/<%=user.id%>/details">Info</a></button>
+        <button class='btn bg-white'><a href="/logout">Log out</a></button>
       <% } else { %>
         <btn><a class='btn' href="/login">Log in</a></btn>
         <btn><a href="/register" class="btn">Sign up</a></btn>
