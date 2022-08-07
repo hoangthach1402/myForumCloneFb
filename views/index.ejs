@@ -1,70 +1,72 @@
-<%- include('./partials/header.ejs') %>
-<div class='container dark '>
-<div class='border p-2 '>
- <p class='fw-bold'>User tieu bieu</p>
- <p class='fw-bold'><a href="/user" class='link-primary'>Xem them</a></p> 
- <table class='table'>
-   <thead>
-     <th>#</th>
-     <th>userName</th>
-     <th>Ngay tao</th>
-     <th>Danh Hieu</th>
-   </thead>
-   <tbody>
-    <% users.forEach((user,index)=>{ %>
-      <tr>
-        <th><%=++index%></th>
-        <td><a href="/user/<%=user._id%>/details"><img style='width:20px;margin-right:5px' class='rounded' src="<%=user.image.url%>" alt=""><%=user.username%></a></td>
-        <td><%=new Date(user.createdAt).toLocaleDateString() %></td>
-        <td class='text-yellow'>Checker Pro</td>
-      </tr>
-   <% }) %> 
-   </tbody>
- </table>
- <!-- post gan day -->
- <div><p class='fw-bold'>Post gan day</p></div>
- <p><a href="/post" class='link-danger'>Xem them</a></p>
- <table class='table'>
-  <thead>
-    <th>#</th>
-    <th>cave</th>
-    <th>title</th>
-    <th>Ngay</th>
-  </thead>
-  <tbody>
-   <% posts.forEach((post,index)=>{ %>
-     <tr>
-       <th><%=++index%></th>
-       <td><a href="/post/<%=post._id%>"><%=post.cave.name%></a></td>
-       <td><%=post.title%></td>
-       <td class='text-yellow'><%= new Date(post.createdAt).toLocaleDateString()%></td>
-     </tr>
-  <% }) %> 
-  </tbody>
-</table>
-<div><p class='fw-bold text-danger'>Review Gan day</p></div>
-<table class='table'>
-  <thead>
-    <th>Review</th>
-    <th>Username</th>
-    <th>cave</th>
-    <th>content</th>
-    <th>Ngay</th>
-  </thead>
-  <tbody>
-    <% reviews.forEach((review,index)=>{ %>
-       <tr>
-         <th><a href="/cave/<%=review.cave._id%>/review/<%=review.id%>"><%=++index%>Chi tiet</a> </th>
-         <td><%=review.user.username%></td>
-         <td><%=review.cave.name%></td>
-         <td><%=review.content %></td>
-         <td><%=new Date(review.createdAt).toLocaleDateString()%></td>
-        </tr>
 
-    <%}) %>
-  </tbody>
-</table>
-</div>  
+<%- include('./partials/header.ejs') %>
+<div class="mt-2">
+
+  <form action="/write" method='POST' enctype="multipart/form-data">
+     <div class='form-group'>
+       <label class='mb-2' for="content"><i class="fa-solid fa-pen-fancy"></i></label>
+       <input type="text" style='width:80%' name='content' placeholder="ban dang nghi gi`???" class='form-control'> 
+     </div>  
+       <input class='m-2 p-2' name='images' type="file" multiple placeholder="Đăng Ảnh">         
+      <button class='d-block btn btn-primary' type='submit'>Đăng Bài`</button>
+  </form>
 </div>
 
-<%- include('./partials/footer.ejs') %>
+
+<!-- write -->
+<div class="m-2">
+  <%writes.forEach(write=>{ %> 
+   <div style='width:80%;margin:auto' class='border mb-2 p-2 shadow'>
+
+
+  
+  <p class='p-2 border-bottom'>
+    <% if(write.wall._id.toString() != write.user._id.toString()) {%>
+    from  <a class='link-primary' href="/user/<%=write.user.id%>/details"> <%=write.user.username%> </a> to 
+      <%}%>     
+    <a class="link-primary" href="/user/<%=write.wall._id%>/details"
+      ><%=write.wall.username%></a
+    >
+    Ngay: <%= new Date(write.createdAt).toLocaleString()%>
+  </p>
+
+
+  <p style="text-indent: 50px;" class="p-2"><%=write.content%></p>
+ <!-- image render -->
+  <div class="d-flex flex-wrap">
+    <% write.fileUploads.forEach(image=>{%>
+    <!-- <p><%=image.filePath%></p> -->
+    <img
+      style="max-width: 300px; min-width: 200px"
+      src="<%=image.filePath%>"
+      alt=""
+    />
+    <%}) %>
+  </div>
+ 
+  <!-- Show Comment  -->
+  <p class='p-2 border-bottom'>Comment:</p>
+   <div class='p-2 text-light mt-2'>
+    <% write.comments.forEach(comment=>{ %>
+      <div style='margin-left:20px' class='border-bottom mb-2'>
+        <p><a class='link-primary' href="/user/<%=comment.user.id%>"><%=comment.user.username%></a>
+           <p style='text-indent: 30px;font-size: 17px;'><%=comment.content%>  <span style='font-size:14px;opacity:0.5'><%=new Date(comment.createdAt).toLocaleString()%></span></p>
+          </p>
+
+      </div>
+   <% }) %> 
+   </div>
+  <!--  -->
+  
+  <form action="/write/<%=write._id%>?_method=put" method="post">
+    <input name='commentInput' class='input my-2' type="text" placeholder="binh luan" />
+    <button class='btn btn-success'><i class="fa-solid fa-paper-plane"></i></button>
+  </form>
+</div>
+  <%}) %>
+
+</div>
+
+
+
+<%- include('./partials/footer.ejs') %> 

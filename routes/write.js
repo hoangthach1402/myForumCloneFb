@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", upload.array("images"), async (req, res) => {
   const content = req.body.content;
-  const wall = req.headers.referer.split("/")[4];
+  const wall = req.headers.referer.split("/")[4] || req.user.id;
   const body = {
     user: req.user.id,
     wall: wall,

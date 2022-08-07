@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { generateToken } = require("../utils/auth");
-const mongoosePaginate = require('mongoose-paginate-v2');
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const imageSchema = new mongoose.Schema({
-  url:String , 
-  fileName:String
-})
+  url: String,
+  fileName: String,
+});
 const userSchema = new mongoose.Schema(
   {
     username: { required: true, type: String },
@@ -17,21 +17,33 @@ const userSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
-    gender: { type: String, enum: ["male", "female"],default:'male'},
+    type: {
+      type: String,
+      enum: [
+        "Photographer",
+        "Blogger",
+        "Normal",
+        "Motivation",
+        "Checker",
+        "Sale",
+      ],
+      default: "Normal",
+    },
+    gender: { type: String, enum: ["male", "female"], default: "male" },
     role: { type: String, enum: ["admin", "user"], default: "user" },
     createdAt: { type: Date, default: Date.now },
-    isDeleted:{type:Boolean, default: false} ,
-    isBanned:{type:Boolean, default: false},
-    image:imageSchema
+    isDeleted: { type: Boolean, default: false },
+    isBanned: { type: Boolean, default: false },
+    image: imageSchema,
+  
   },
-   
+
   {
-    timestamps:true,
+    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
-
 
 const generatePassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
@@ -69,7 +81,6 @@ userSchema.virtual("comments", {
   foreignField: "user",
 });
 userSchema.plugin(mongoosePaginate);
-
 
 //comments  binhluanganday
 const User = mongoose.model("User", userSchema, "User");

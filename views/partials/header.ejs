@@ -34,7 +34,7 @@ nav{
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 20px;
-  background-color: darkblue;
+  background-color: rgb(11, 11, 163);
   padding-bottom: 20px;
 }
 nav ul{
@@ -74,31 +74,6 @@ input{
   /* width: 100%; */
 }
 
-.error{
-  color: #ff0099;
-  margin: 10px 2px;
-  font-size: 0.8em;
-  font-weight: bold;
-}
-header{
-  display: flex;
-  align-items: center;
-}
-header img{
-  width: 250px;
-  margin-right: 40px;
-}
-header h2{
-  font-size: 3em;
-  margin-bottom: 10px;
-}
-header h3{
-  font-size: 1.6em;
-  margin-bottom: 10px;
-  margin-left: 2px;
-  color: #999;
-}
-
 
 
 footer{
@@ -109,17 +84,18 @@ footer{
   </style>
 </head>
 <body>
-  <nav class=''>
-    <button class='btn bg-white'><a href="/">Forum App</a></button>
-    <div class='d-flex'>
+  <nav class='d-flex justify-content-around align-center'>
+   <a class='btn btn-primary py-2 align-center' href="/"><i class="fa-brands fa-facebook-f"></i> FakeBook </a>
+    
+   <div class='d-flex'>
       <% if (user) { %>
-        <button class='btn btn-success text-white '><a href="/post/new"><i class="fa-solid fa-marker"></i>New Post</a></button>
-        <button class='bg-white btn'><img style='width:30px; border-radius:999px' src="<%=user.image.url%>" alt=""> Welcome, <%= user.username %></button>
-        <button class='btn bg-white'><a  href="/user/<%=user.id%>/details">Info</a></button>
-        <button class='btn bg-white'><a href="/logout">Log out</a></button>
+  <a class='btn btn-info' href="/post/new"><i class="fa-solid fa-marker"></i>New Report</a>
+        <span class=' btn btn-primary'><img style='width:30px; border-radius:999px' src="<%=user.image.url%>" alt=""> Welcome, <%= user.username %></span>
+        <a  class='btn btn-success' href="/user/<%=user.id%>/details"><i class="fa-solid fa-user"></i></a></>
+        <a class='btn btn-danger text-white' href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       <% } else { %>
-        <btn><a class='btn' href="/login">Log in</a></btn>
-        <btn><a href="/register" class="btn">Sign up</a></btn>
+        <><a class='btn btn-primary' href="/login">Log in</a></>
+        <><a class='btn btn-primary' href="/register" class="btn">Sign up</a></>
       <% } %>
     </ul>
   </nav>

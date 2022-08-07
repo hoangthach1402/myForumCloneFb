@@ -3,17 +3,37 @@ const jwt = require("jsonwebtoken");
 const { generateToken } = require("../utils/auth");
 const asyncHandler = require("../utils/async");
 const { registerSuccess } = require("../dtos/responseApp/user.dto");
-const Post = require('../models/post')
-const Review = require('../models/review')
-
+const Post = require("../models/post");
+const Review = require("../models/review");
+const Write = require("../models/Write");
 const bcrypt = require("bcrypt");
 
 const authController = {
-  getHome:async(req,res,next)=>{
-    const users = await User.find().sort({createdAt:'desc'}).limit(3);
-    const posts = await Post.find().populate({path:'cave',select:'name'}).sort({createdAt:'desc'}).limit(10);
-    const reviews = await Review.find().populate({path:'user',select:'username'}).populate({path:'cave',select:'name'}).sort({createdAt:'desc'}).limit(5);
-    res.render('index',{users,posts,reviews})
+  getStatic: async (req, res, next) => {
+    const users = await User.find().sort({ createdAt: "desc" }).limit(3);
+    const posts = await Post.find()
+      .populate({ path: "cave", select: "name" })
+      .sort({ createdAt: "desc" })
+      .limit(10);
+    const reviews = await Review.find()
+      .populate({ path: "user", select: "username" })
+      .populate({ path: "cave", select: "name" })
+      .sort({ createdAt: "desc" })
+      .limit(5);
+    res.render("index", { users, posts, reviews });
+  },
+  getHome: async (req, res, next) => {
+    const writes = await Write.find()
+      .populate({ path: "user", select: "username image" })
+      .populate({ path: "wall", select: "username image" })
+      .populate({
+        path: "comments",
+        populate: { path: "user", select: "username image" },
+      }).populate({path:'fileUploads'})
+      .sort({ createdAt: "desc" })
+      .limit(10);
+    res.render("index", { writes });
+      // res.json(writes)
   },
   loginDisplay: (req, res) => {
     res.render("user/login");

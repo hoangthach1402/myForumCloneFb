@@ -1,0 +1,70 @@
+<%- include('./partials/header.ejs') %>
+<div class='container dark '>
+<div class='border p-2 '>
+ <p class='fw-bold'>User tieu bieu</p>
+ <p class='fw-bold'><a href="/user" class='link-primary'>Xem them</a></p> 
+ <table class='table'>
+   <thead>
+     <th>#</th>
+     <th>userName</th>
+     <th>Ngay tao</th>
+     <th>Danh Hieu</th>
+   </thead>
+   <tbody>
+    <% users.forEach((user,index)=>{ %>
+      <tr>
+        <th><%=++index%></th>
+        <td><a href="/user/<%=user._id%>/details"><img style='width:20px;margin-right:5px' class='rounded' src="<%=user.image.url%>" alt=""><%=user.username%></a></td>
+        <td><%=new Date(user.createdAt).toLocaleDateString() %></td>
+        <td class='text-yellow'>Checker Pro</td>
+      </tr>
+   <% }) %> 
+   </tbody>
+ </table>
+ <!-- post gan day -->
+ <div><p class='fw-bold'>Post gan day</p></div>
+ <p><a href="/post" class='link-danger'>Xem them</a></p>
+ <table class='table'>
+  <thead>
+    <th>#</th>
+    <th>cave</th>
+    <th>title</th>
+    <th>Ngay</th>
+  </thead>
+  <tbody>
+   <% posts.forEach((post,index)=>{ %>
+     <tr>
+       <th><%=++index%></th>
+       <td><a href="/post/<%=post._id%>"><%=post.cave.name%></a></td>
+       <td><%=post.title%></td>
+       <td class='text-yellow'><%= new Date(post.createdAt).toLocaleDateString()%></td>
+     </tr>
+  <% }) %> 
+  </tbody>
+</table>
+<div><p class='fw-bold text-danger'>Review Gan day</p></div>
+<table class='table'>
+  <thead>
+    <th>Review</th>
+    <th>Username</th>
+    <th>cave</th>
+    <th>content</th>
+    <th>Ngay</th>
+  </thead>
+  <tbody>
+    <% reviews.forEach((review,index)=>{ %>
+       <tr>
+         <th><a href="/cave/<%=review.cave._id%>/review/<%=review.id%>"><%=++index%>Chi tiet</a> </th>
+         <td><%=review.user.username%></td>
+         <td><%=review.cave.name%></td>
+         <td><%=review.content %></td>
+         <td><%=new Date(review.createdAt).toLocaleDateString()%></td>
+        </tr>
+
+    <%}) %>
+  </tbody>
+</table>
+</div>  
+</div>
+
+<%- include('./partials/footer.ejs') %>
