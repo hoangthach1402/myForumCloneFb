@@ -1,26 +1,30 @@
 
 <%- include('./partials/header.ejs') %>
-<div class="mt-2">
+<% if(user){ %>
 
-  <form action="/write" method='POST' enctype="multipart/form-data">
-     <div class='form-group'>
-       <label class='mb-2' for="content"><i class="fa-solid fa-pen-fancy"></i></label>
-       <input type="text" style='width:80%' name='content' placeholder="ban dang nghi gi`???" class='form-control'> 
-     </div>  
-       <input class='m-2 p-2' name='images' type="file" multiple placeholder="Đăng Ảnh">         
-      <button class='d-block btn btn-primary' type='submit'>Đăng Bài`</button>
-  </form>
-</div>
+  <div class='mt-5'>
+  
+    <form action="/write" method='POST' enctype="multipart/form-data">
+       <div class='form-group'>
+         <label class='mb-2' for="content"><i class="fa-solid fa-pen-fancy"></i></label>
+         <input type="text" style='width:80%' name='content' placeholder="ban dang nghi gi`???" class='form-control'> 
+       </div>  
+         <input class='m-2 p-2' name='images' type="file" multiple placeholder="Đăng Ảnh">         
+        <button class='d-block btn btn-primary' type='submit'>Đăng Bài`</button>
+    </form>
+  </div>
+<%} %>
 
 
-<!-- write -->
-<div class="m-2">
+<!-- writes -->
+<div style="margin-top:70px" >
   <%writes.forEach(write=>{ %> 
    <div style='width:80%;margin:auto' class='border mb-2 p-2 shadow'>
 
 
   
-  <p class='p-2 border-bottom'>
+  <p style='background:#dbe2ed' class='p-2 border-bottom'>
+   <a class='btn btn-primary text-white ' href="/write/<%=write._id%>/details">Chi tiet</a>
     <% if(write.wall._id.toString() != write.user._id.toString()) {%>
     from  <a class='link-primary' href="/user/<%=write.user.id%>/details"> <%=write.user.username%> </a> to 
       <%}%>     
@@ -37,19 +41,29 @@
     <% write.fileUploads.forEach(image=>{%>
     <!-- <p><%=image.filePath%></p> -->
     <img
-      style="max-width: 300px; min-width: 200px"
+      style="max-height:300px; max-width: 300px; min-width: 200px"
       src="<%=image.filePath%>"
       alt=""
     />
     <%}) %>
   </div>
- 
+  <!-- like unlike -->
+  <div class='p-2'>
+    <form action="/write/<%=write._id%>/like?_method=put" method='POST'>
+    
+      <button class='btn' type='submit'><i class="fa-solid fa-thumbs-up"></i></button>
+      <i style='transform: rotate(180deg)' class="fa-solid fa-thumbs-up"></i>   
+     </button>
+     </div>
+
+    </form>
+
   <!-- Show Comment  -->
   <p class='p-2 border-bottom'>Comment:</p>
    <div class='p-2 text-light mt-2'>
     <% write.comments.forEach(comment=>{ %>
       <div style='margin-left:20px' class='border-bottom mb-2'>
-        <p><a class='link-primary' href="/user/<%=comment.user.id%>"><%=comment.user.username%></a>
+        <p><a class='link-primary' href="/user/<%=comment.user.id%>/details"><%=comment.user.username%></a>
            <p style='text-indent: 30px;font-size: 17px;'><%=comment.content%>  <span style='font-size:14px;opacity:0.5'><%=new Date(comment.createdAt).toLocaleString()%></span></p>
           </p>
 
@@ -67,6 +81,5 @@
 
 </div>
 
-
-
 <%- include('./partials/footer.ejs') %> 
+

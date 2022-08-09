@@ -30,12 +30,14 @@ a{
   text-decoration: none;
 }
 nav{
+  position:fixed;
+  width:100%;
+  top:0;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 20px;
   background-color: rgb(11, 11, 163);
-  padding-bottom: 20px;
 }
 nav ul{
   display: flex;
@@ -89,15 +91,17 @@ footer{
     
    <div class='d-flex'>
       <% if (user) { %>
-  <a class='btn btn-info' href="/post/new"><i class="fa-solid fa-marker"></i>New Report</a>
-        <span class=' btn btn-primary'><img style='width:30px; border-radius:999px' src="<%=user.image.url%>" alt=""> Welcome, <%= user.username %></span>
-        <a  class='btn btn-success' href="/user/<%=user.id%>/details"><i class="fa-solid fa-user"></i></a></>
-        <a class='btn btn-danger text-white' href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+  <!-- <a class='btn btn-info' href="/post/new"><i class="fa-solid fa-marker"></i>New Report</a> -->
+      
+        <a  class='btn btn-success' href="/user/<%=user.id%>/details"> <img style='width:30px; border-radius:999px' src="<%=user.image.url%>" alt=""><%= user.username %></a>
+        <a style='background-color:blue; border-radius:50%;color:rgb(156, 207, 236)' class='p-2 ' href=""><i class="fa-solid fa-user-group"></i></a>
+        <a class='btn btn-info text-white' href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       <% } else { %>
         <><a class='btn btn-primary' href="/login">Log in</a></>
         <><a class='btn btn-primary' href="/register" class="btn">Sign up</a></>
       <% } %>
     </ul>
   </nav>
-  <div class='container-fluid'>
+  <div class='container-fluid '>
+    <div class='mb-5 w-100'>.</div>
   

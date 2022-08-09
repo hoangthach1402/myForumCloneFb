@@ -8,6 +8,14 @@ const imageSchema = new mongoose.Schema({
   url: String,
   fileName: String,
 });
+const followerSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+})
+  
+const friendSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  isAccept:{type:Boolean,defaul:false}
+})
 const userSchema = new mongoose.Schema(
   {
     username: { required: true, type: String },
@@ -31,11 +39,12 @@ const userSchema = new mongoose.Schema(
     },
     gender: { type: String, enum: ["male", "female"], default: "male" },
     role: { type: String, enum: ["admin", "user"], default: "user" },
-    createdAt: { type: Date, default: Date.now },
+
     isDeleted: { type: Boolean, default: false },
     isBanned: { type: Boolean, default: false },
     image: imageSchema,
-  
+    friends:[friendSchema],
+    followers:[followerSchema]
   },
 
   {

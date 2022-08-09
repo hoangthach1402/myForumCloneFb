@@ -64,7 +64,7 @@ const authController = {
         //dang nhap thanh cong
         req.user = user;
         res.cookie("jwt", bearToken);
-        res.redirect(`/user/${user.id}/details`);
+        res.redirect(`/`);
       }
     } catch (err) {
       res.send(err);
@@ -84,7 +84,7 @@ const authController = {
     //dang nhap thanh cong
     req.user = user;
     res.cookie("jwt", bearToken);
-    res.redirect(`/user/${user.id}/details`);
+    res.redirect(`/`);
     // res.render('user/detail')
   }),
 };

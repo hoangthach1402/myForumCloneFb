@@ -3,7 +3,7 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const likeItem= new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    type:{type:String,enum:["Like","DisLike"]}
+    isLike:{type:Boolean,required:true}
 })
 
 const commentSchema = new mongoose.Schema({
