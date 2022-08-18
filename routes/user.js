@@ -11,8 +11,8 @@ const {isAuthenticated,isAdmin,checkOwner} = require('../middleware/auth')
 
 router.route('/').get(userController.getUsers)
 router.get('/:userId/getallcomment',userController.getUserByIdWithComment)
-
 router.get('/:userId/details',isAuthenticated,checkOwner,userController.getDetail)
+
 router.post('/:userId/banned',isAuthenticated,checkOwner,userController.updateBanned)
 
 

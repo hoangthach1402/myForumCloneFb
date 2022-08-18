@@ -3,10 +3,10 @@
   <%writes.forEach(write=>{ %> 
    <div class='border mb-2 p-2'>
     <%if(owner || (write.user.id==user.id)){ %>
-      <form action="/write/<%=write._id%>?_method=DELETE" method='POST'>
+    
+      <button type='button' onclick=onDelete('<%= write.id %>')   class="btn btn-danger">X</button>
 
-        <button type='submit' class="btn btn-danger">X</button>
-      </form>
+     
 
     <%} %>
 
@@ -56,4 +56,11 @@
   <%}) %>
 
 </div>
-
+<script>
+  const onDelete =(writeId)=>{
+    fetch(`http://localhost:3000/write/${writeId}`,{
+      method:'DELETE'
+    }).then((res)=> console.log(res.json()))
+    .then(()=>  window.location.reload())
+  }
+</script>

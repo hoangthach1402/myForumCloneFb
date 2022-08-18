@@ -5,6 +5,8 @@ const multer = require("multer");
 const { storage } = require("../cloudinary");
 const upload = multer({ storage });
 const writeController = require('../controller/writeController')
+const {isAuthenticated} = require('../middleware/auth')
+
 
 // dashboard
 
@@ -14,7 +16,7 @@ router.post("/",upload.array("images"), writeController.createWrite);
  
 router.get('/:writeId/details',writeController.getDetail)
 
-router.put('/:writeId',writeController.addComment)
+router.put('/:writeId',isAuthenticated,writeController.addComment)
 router.put('/:writeId/like',writeController.addLike)
 router.delete('/:writeId',writeController.deleteWrite)
 

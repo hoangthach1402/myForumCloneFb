@@ -44,89 +44,9 @@
 
   <!-- write Post -->
   <%- include('../write/new.ejs') %>
+  <%- include('../write/show.ejs') %>
   <!--  -->
-<div>
-    <p class='fw-bold'>POST gan da!</p>
-    <div>
-      <table class="table">
-        <thead">
-          <tr>
-            <th>#</th>
-            <th>Titlle</th>
-            <th>Description</th>
-            <th>Ngay:</th>
-             <th>methods</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% userdetail.posts.forEach(post=>{ %>
-            <tr>
-              <th><a href="/cave/<%=post.cave%>"><%=post.title %> </a></th>
-              <td><%=post.description %></td>
-              <td><%= new Date(post.createdAt).toLocaleDateString()%></td>
-              <td><%=post.description %></td>
-              <!-- edit and delete  post -->
-              <!-- edit :/post/:postId/edit -->
-              <td><%if(owner){%> <button><a href="/post/<%=post.id%>/edit">Edit</a></button> 
-                <form action="/post/<%=post.id%>?_method=DELETE" method='POST'><button class='btn text-danger' type='submit'>X</button></form>
-                <%} %></td>
-            </tr>
-          <%}) %>
-       
-        </tbody>
-      </table>
-    </div>
-    </div>
-    <!-- review gan day -->
 
-    <div>
-      <p class='fw-bold'>Review Gan Day</p>
-      <table class='table'>
-        <thead>
-          <th>#</th>
-          <th>Cave</th>
-          <th>Noi Dung</th>
-          <th>Ngay Tao</th>
-        </thead>
-        <tbody>
-          <% userdetail.reviews.forEach(review=>{ %>
-            <tr>
-              <th>#</th>
-              <td><a href="/cave/<%=review.cave.id%>/review/<%=review._id%>"><%=review.cave.name%></a></td>
-              <td><%=review.content%></td>
-              <td><%= new Date(review.createdAt).toLocaleDateString()%></td>
-            </tr>
-      <% }) %>
-        
-        </tbody>
-      </table>
-    
-    </div>
-
-    <!-- comment -->
-    <div>
-      <p class='fw-bold'>Comment gan day</p>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Cave</th>
-            <th>Noi dung</th>
-            <th>Ngay</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% userdetail.comments.forEach(comment=>{%>
-            <tr>
-              <th>#</th>
-              <td><a href="/"><%=comment.cave.name%></a></td>
-              <td><%=comment.content%></td>
-              <td><%= new Date(comment.createdAt).toLocaleDateString()%></td>
-            </tr>
-         <% }) %>
-        </tbody>
-      </table>
-    </div>
 </div>
 
 

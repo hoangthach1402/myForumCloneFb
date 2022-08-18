@@ -28,8 +28,10 @@ const writeController = {
         docModel: "Write",
       });
     }
-
-    res.redirect("back");
+    res.json({success:true,message:'success adding new write',data:write})
+    // res.history.back
+    // res.redirect("back"); 
+    // res.
     // res.json(write)
   },
   addComment: async (req, res) => {
@@ -47,7 +49,8 @@ const writeController = {
   deleteWrite: async (req, res) => {
     const write = await Write.findById(req.params.writeId);
     await write.remove();
-    res.redirect("back");
+    // res.redirect("back");
+    res.json({success:true,message:'write is deleted'})
   },
   addLike: async (req, res) => {
     const write = await Write.findById(req.params.writeId);
